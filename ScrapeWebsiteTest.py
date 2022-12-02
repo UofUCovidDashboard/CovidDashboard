@@ -2,7 +2,7 @@ import ScrapeWebsite
 import json
 
 #Use this script to gather data using the scrape_country function
-#IMPORTANT: Make sure to change the filename to the current date before running (line 15)
+#IMPORTANT: Make sure to change the filename to the current date before running (line 14)
 countryData = []
 countries = ["usa", "india", "france", "germany", "brazil", "s. korea", "japan", "italy", "uk", "russia", "turkey", "spain", "vietnam", "australia", "argentina", "netherlands", "taiwan", "iran", "mexico", "indonesia", "poland", "colombia", "austria", "portugal", "greece"]
 

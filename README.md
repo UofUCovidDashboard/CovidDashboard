@@ -1,6 +1,11 @@
 # CovidDashboard
 Julia Gatto, Zach Lin, Aleks Vazquez
-We will use earthquake data for the project instead (approved by Dr. Balouek-Thomert)
+We were approved to use earthquake data for the project instead (approved by Dr. Balouek-Thomert), but we had issues
+getting it to read in properly so for now we are using COVID data.
+
+Instructions for running code:
+From the ScrapeWebsite module, the scrape_country function is meant to be called with this link: https://www.worldometers.info/coronavirus/. If not, the scraping will not function properly. scrape_country returns a dictionary with the country name, total deaths (normalized by 1M), and the daily deaths (not normalized)
+Use of this code requires the requests, BeautifulSoup, re, and json libraries.
 
 
 Due Dec 3:

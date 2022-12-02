@@ -1,0 +1,12 @@
+Explain how you collected the data:
+The data was collected over two consecutive days (12/2/2022-12/3/2022), and is taken from this website: 
+https://www.worldometers.info/coronavirus/. The names, total deaths, and daily deaths of 25 different countries
+were collected. The scrape_country function collects the data by using the requests library to get the HTML of 
+the website and then using the BeautifulSoup library to parse through the HTML and gather the relevant data. The
+data is then returned as a dictionary.
+
+
+Explain how the JSON is organized:
+There is a separate JSON file for each day that data is collected. Each JSON file contains a list of dictionaries,
+where each dictionary contains the info for a country (name, total deaths normalized by 1M, daily deaths). This
+JSON file can be read into a script to manipulate and view the data.

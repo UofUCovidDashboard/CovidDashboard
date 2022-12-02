@@ -1,5 +1,7 @@
 #Module for scraping website data
 
+#scrape_country takes a string country, the country of interest, and a string url, the web address of the website to scrape data from
+#A dictionary is returned with the name of the country, the total deaths normalized by 1M, and the daily deaths
 def scrape_country(country, url):
     import requests
     from bs4 import BeautifulSoup
@@ -15,30 +17,23 @@ def scrape_country(country, url):
     head = body[0]
     body_rows = body[1:]
     
-    headings = []
-    for item in head.find_all("th"):
-        item = (item.text).rstrip("\n")
-        headings.append(item)
-    
     countryDict = {}
     
-    all_rows = [] # will be a list for list for all rows
-    for row_num in range(len(body_rows)): # A row at a time
-        row = [] # this will old entries for one row
+    #The following website was used as a reference in writing this code: https://towardsdatascience.com/web-scraping-scraping-table-data-1665b6b2271c
+    for row_num in range(len(body_rows)): #Loop through each row
+        row = [] # this will hold entries for one row
         for row_item in body_rows[row_num].find_all("td"): #loop through all row entries
-            # row_item.text removes the tags from the entries
-            # the following regex is to remove \xa0 and \n and comma from row_item.text
-            # xa0 encodes the flag, \n is the newline and comma separates thousands in numbers
-            aa = re.sub("(\xa0)|(\n)|,|/+","",row_item.text)
-            #append aa to row - note one row entry is being appended
-            row.append(aa)
-        # append one row to all_rows
+            #Use regex to clean up data
+            data = re.sub("(\xa0)|(\n)|,|/+","",row_item.text)
+            row.append(data)
+        # Check if current row corresponds to country of interest
         if country.lower() in row[1].lower():
             #print("Country: ", row[1])
             countryName = row[1]
             #print("Total Deaths (normalized by 1000000): ", str(int(row[4].strip())/1000000))
             totalDeaths = str(int(row[4].strip())/1000000)
             #print("Daily Deaths: ", row[5][1:])
+            #If daily deaths is empty, there were 0 daily deaths
             if row[5][1:].strip() == "":
                 dailyDeaths = "0"
             else:
@@ -46,27 +41,5 @@ def scrape_country(country, url):
                 
             countryDict = {"name": countryName, "totaldeaths": totalDeaths, "dailydeaths": dailyDeaths}
             return countryDict
-            
-        all_rows.append(row)
-        
-    
-    # json_object = json.dumps(countryDict)
-    # print("Json string", json_object)
-    
-    # filename = country + ".json"
-    # with open(filename, "w") as outfile:
-    #     outfile.write(json_object)
-    
-    
-    # usa = soup.find("td", class_="name align-left usa usa")
-    # print(usa.text)
-    # countries = soup.find_all("td", class_="name align-left usa usa")
-    # country_elements = [a_element.parent.parent for a_element in countries]
-    # for element in country_elements:
-    #     name_element = element.find("a", class_="mt_a")
-    #     print(name_element.text)
-    #     # cases_element = element.find("td", class_="sorting_1")
-    #     # print(cases_element.text)
-    #     # print()
-    
+    #This point will not be hit it the country is found. If it is not, countryDict will be an empty dictionary
     return countryDict
