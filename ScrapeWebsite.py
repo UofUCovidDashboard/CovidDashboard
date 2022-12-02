@@ -20,6 +20,8 @@ def scrape_country(country, url):
         item = (item.text).rstrip("\n")
         headings.append(item)
     
+    countryDict = {}
+    
     all_rows = [] # will be a list for list for all rows
     for row_num in range(len(body_rows)): # A row at a time
         row = [] # this will old entries for one row
@@ -32,26 +34,28 @@ def scrape_country(country, url):
             row.append(aa)
         # append one row to all_rows
         if country.lower() in row[1].lower():
-            print("Country: ", row[1])
+            #print("Country: ", row[1])
             countryName = row[1]
-            print("Total Deaths (normalized by 1000000): ", str(int(row[4].strip())/1000000))
+            #print("Total Deaths (normalized by 1000000): ", str(int(row[4].strip())/1000000))
             totalDeaths = str(int(row[4].strip())/1000000)
-            print("Daily Deaths: ", row[5][1:])
+            #print("Daily Deaths: ", row[5][1:])
             if row[5][1:].strip() == "":
                 dailyDeaths = "0"
             else:
                 dailyDeaths = row[5][1:].strip()
+                
+            countryDict = {"name": countryName, "totaldeaths": totalDeaths, "dailydeaths": dailyDeaths}
+            return countryDict
             
         all_rows.append(row)
         
-    countryDict = {"name": countryName, "totaldeaths": totalDeaths, "dailydeaths": dailyDeaths}
     
-    json_object = json.dumps(countryDict)
-    print("Json string", json_object)
+    # json_object = json.dumps(countryDict)
+    # print("Json string", json_object)
     
-    filename = country + ".json"
-    with open(filename, "w") as outfile:
-        outfile.write(json_object)
+    # filename = country + ".json"
+    # with open(filename, "w") as outfile:
+    #     outfile.write(json_object)
     
     
     # usa = soup.find("td", class_="name align-left usa usa")
@@ -64,7 +68,5 @@ def scrape_country(country, url):
     #     # cases_element = element.find("td", class_="sorting_1")
     #     # print(cases_element.text)
     #     # print()
-        
     
-
-    return
+    return countryDict
