@@ -11,7 +11,7 @@ Use of this code requires the requests, BeautifulSoup, re, and json libraries.
 Due Dec 3:
 Part 1: Data scraping
 
-Commit scraping code
+Commit scraping code..
 
 []       ScrapeWebsite 
        []     collect raw Daily rates
