@@ -11,5 +11,5 @@ for country in countries:
 
 json_object = json.dumps(countryData)
 
-with open("12-5-22.json", "w") as outfile: #filename in the format month-day-year
+with open("12-6-22.json", "w") as outfile: #filename in the format month-day-year
     outfile.write(json_object)
