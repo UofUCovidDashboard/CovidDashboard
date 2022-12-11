@@ -5,9 +5,6 @@
 # 7BE495 lime ish 
 # CFF4D2 key limeish
 
-
-
-
 # Covid Dashboard needs:
 ## Necessary imports
 import json
@@ -27,8 +24,8 @@ from bokeh.models import ColumnDataSource, FactorRange
 from bokeh.transform import factor_cmap
 from bokeh.models import ColumnDataSource
 from bokeh.models import LinearAxis, Range1d
-
 from bokeh.models import Range1d
+
 ## pull the data from the data scrape json files
 days = [2, 3, 5, 6, 7, 8, 9, 10]
 data = []
@@ -50,17 +47,19 @@ for i in range(len(data)):
 ## define the list of country names 
 countryNames = ['USA', 'India', 'France', 'Germany', 'Brazil', 'S. Korea', 'Japan', 'Italy', 'UK', 'Russia', 'Turkey', 'Spain', 'Vietnam', 'Australia', 'Argentina', 'Netherlands', 'Taiwan', 'Iran', 'Mexico', 
 'Indonesia', 'Poland', 'Colombia', 'Austria', 'Portugal', 'Greece']
+
 # REMOVE THIS AND FIX WITH THE AVERAGE DAILY DEATH DATA
 temporaryDailyData = [12, 14, 15, 17, 18, 19, 30, 34, 35, 36, 46, 24, 25, 47, 37, 46, 25, 25, 25, 24, 24,50,46,3,24]
 
 # Pull data for a few countries. We chose the US, Taiwan, Italy, Mexico and Germany.
 
 usaData = []
+usaDataNorm = []
 for i in range(len(data)):
     for j in range(len(data[i])):
         if data[i][j]["name"] == "USA":
             usaData.append(data[i][j]["dailydeaths"])
-            
+            usaDataNorm.append(data[i][j]["totaldeaths"])
 taiwanData = []
 for i in range(len(data)):
     for j in range(len(data[i])):
@@ -86,8 +85,8 @@ for i in range(len(data)):
             germanyData.append(data[i][j]["dailydeaths"])
 
 dates = [dt(2022, 12, 2), dt(2022, 12, 3), dt(2022, 12, 5), dt(2022, 12, 6), dt(2022, 12, 7), dt(2022, 12, 8), dt(2022, 12, 9), dt(2022, 12, 10)]
-# Plot 1 should contain an overview of all the countries. It will be averaged over all the data. I named it "All Country"
 
+# Plot 1 should contain an overview of all the countries. It will be averaged over all the data. I named it "All Country"
 allCountry = figure(x_range = countryNames, height = 200,width = 1500, title="Average Daily Deaths Per Country Over a One Week Period",
                     toolbar_location = None,tools="",x_axis_label='Country', y_axis_label='Daily Deaths')
 allCountry.vbar(x = countryNames,top = temporaryDailyData,width= 0.5, color = "#205072")
@@ -120,6 +119,7 @@ zoomed.vbar(x='x', top='counts', width=0.9, source=source, line_color="white",
 zoomed.yaxis.axis_label = "Daily Death Rates"
 zoomed.y_range = Range1d(-10,250)
 zoomed.extra_y_ranges['foo'] = Range1d(0,1)
+# FIX THIS
 ax2 = LinearAxis(y_range_name = "foo", axis_label = "Normalized Ratio")
 zoomed.add_layout(ax2, 'left')
 zoomed.y_range.start = 0
@@ -137,8 +137,6 @@ interactive.line(dates, taiwanData, legend_label="Taiwan", color="#008B8B", line
 interactive.line(dates, mexicoData, legend_label="Mexico", color="#FFF8DC", line_width=2)
 interactive.line(dates, italyData, legend_label="Italy", color="#6495ED", line_width=2)
 interactive.line(dates, germanyData, legend_label="Germany", color="#00FA9A", line_width=2)
-#interactive.legend.orientation = "horizontal"
-#interactive.legend.location= "top_center"
 interactive.y_range = Range1d(-10,250)
 interactive.legend.click_policy = "hide"
 interactive.background_fill_color = "#7BE495"
@@ -147,13 +145,13 @@ interactive.outline_line_width = 2
 
 # Plot 4 should contain historical data over an adjustable period. It needs a slider to adjust the range. I named it "Historical"
 dummyNormData = [0.3, 0.4, 0.5, 0.6, 0.7]
+# REPLACE WITH NORMALIZED DATA FOR 5 COUNTRIES
 historical = figure(title="Historical Normalized Death Rate Over a Week Long Period", x_axis_label='Dates', x_axis_type = "datetime", y_axis_label='Normalized Death Rate',
                     height = 250,width = 1500)
 historical.line(dates, dummyNormData, legend_label="USA", color="blue", line_width=2)
 historical.background_fill_color = "#7BE495"
 historical.outline_line_color = "#CFF4D2"
 historical.outline_line_width = 2
-
 # set up RangeSlider
 date_range_slider = DateRangeSlider(
     value=(dates[2], dates[5]),
@@ -176,15 +174,6 @@ overallTitle = Div(
     height=10,
     margin = (5,650,25,650) 
     
-)
-spacer = Div(
-    text="""
-          <p>      </p>
-          <p>     <p>
-          """,
-    width=500,
-    height=10,
-    margin = (25,25,25,25)
 )
 OverallStatistics = Div(
     text="""
