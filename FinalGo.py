@@ -196,29 +196,15 @@ dataDaily = {'Countries'  : shortLists,
 dataNormalized = {'Countries'  : shortLists,
         'Normalized' : [normalizedAverage[0], normalizedAverage[11], normalizedAverage[12], normalizedAverage[7], normalizedAverage[3]]}
 
-
-palette = ["#c9d9d3", "#718dbf", "#e84d60"]
-
 # this creates [ ("Apples", "2015"), ("Apples", "2016"), ("Apples", "2017"), ("Pears", "2015), ... ]
 xDaily = [ (shortList, "Daily") for shortList in shortLists]
 xNormalized = [ (shortList, "Normalized") for shortList in shortLists]
 countsDaily = sum(zip(dataDaily['Daily']), ()) # like an hstack
 countsNormalized = sum(zip(dataNormalized['Normalized']), ())
+zoomed = figure(x_range=shortLists, height=300, width = 750, title="Detailed COVID Stats for Select Countries", y_axis_label='Deaths')
 
-source1 = ColumnDataSource(data=dict(x1=xDaily, counts1=countsDaily))
-source2 = ColumnDataSource(data=dict(x2=xNormalized, counts2 = countsNormalized))
-zoomed = figure(x_range=FactorRange(*xDaily,*xNormalized), height=300, width = 750, title="Detailed COVID Stats for Select Countries", y_axis_label='Deaths')
-
-zoomed.vbar(x='xDaily', top='countsDaily', width=0.9, source=source1, line_color="white",
-       fill_color=factor_cmap('x', palette=palette, factors=typeDatasDaily, start=1, end=2))
-zoomed.vbar(x='xNormalized', top='countsNormalized', width=0.9, source=source2, line_color="white",
-       fill_color=factor_cmap('x', palette=palette, factors=typeDatasNormalized, start=1, end=2))
+zoomed.vbar(x='xDaily', top='countsDaily', width=0.9)
 zoomed.yaxis.axis_label = "Daily Death Rates"
-zoomed.y_range = Range1d(-10,250)
-zoomed.extra_y_ranges['foo'] = Range1d(0,1)
-# FIX THIS
-ax2 = LinearAxis(y_range_name = "foo", axis_label = "Normalized Ratio")
-zoomed.add_layout(ax2, 'left')
 zoomed.y_range.start = 0
 zoomed.x_range.range_padding = 0.1
 zoomed.xaxis.major_label_orientation = 1
