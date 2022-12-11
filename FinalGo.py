@@ -8,23 +8,13 @@
 # Covid Dashboard needs:
 ## Necessary imports
 import json
-from bokeh.plotting import figure
+from bokeh.plotting import figure, output_file, show
 from bokeh.palettes import GnBu3, OrRd3
 from datetime import datetime as dt
-from bokeh.layouts import gridplot
-from bokeh.layouts import layout
-from bokeh.io import show
-from bokeh.models import CustomJS, DateRangeSlider
-from bokeh.models import Div, RangeSlider, Spinner
-from bokeh.layouts import row
-from bokeh.layouts import column
-from bokeh.plotting import figure, output_file, show
-from bokeh.io import curdoc
-from bokeh.models import ColumnDataSource, FactorRange
+from bokeh.layouts import gridplot, layout, row, column
+from bokeh.io import show, curdoc
+from bokeh.models import CustomJS, DateRangeSlider, Div, RangeSlider, Spinner, ColumnDataSource, FactorRange, LinearAxis, Range1d
 from bokeh.transform import factor_cmap
-from bokeh.models import ColumnDataSource
-from bokeh.models import LinearAxis, Range1d
-from bokeh.models import Range1d
 
 ## pull the data from the data scrape json files
 days = [2, 3, 5, 6, 7, 8, 9, 10]
@@ -198,24 +188,31 @@ allCountry.outline_line_width = 3
 
 # Plot 2 should contain a zoomed in view of the selected countries and their details. I named it "Zoomed"
 shortLists = ['USA','Taiwan','Mexico','Italy','Germany']
-typeDatas = ['Daily','Normalized']
+typeDatasDaily = ['Daily']
+typeDatasNormalized = ['Normalized']
 
-data = {'Countries'  : shortLists,
-        'Daily'      : [2, 1, 4, 3, 2],
-        'Normalized' : [5, 3, 3, 2, 4]}
+dataDaily = {'Countries'  : shortLists,
+        'Daily'      : [dailyAverage[0], dailyAverage[11], dailyAverage[12], dailyAverage[7], dailyAverage[3]]}
+dataNormalized = {'Countries'  : shortLists,
+        'Normalized' : [normalizedAverage[0], normalizedAverage[11], normalizedAverage[12], normalizedAverage[7], normalizedAverage[3]]}
+
 
 palette = ["#c9d9d3", "#718dbf", "#e84d60"]
 
 # this creates [ ("Apples", "2015"), ("Apples", "2016"), ("Apples", "2017"), ("Pears", "2015), ... ]
-x = [ (shortList, typeData) for shortList in shortLists for typeData in typeDatas ]
-counts = sum(zip(data['Daily'], data['Normalized']), ()) # like an hstack
+xDaily = [ (shortList, "Daily") for shortList in shortLists]
+xNormalized = [ (shortList, "Normalized") for shortList in shortLists]
+countsDaily = sum(zip(dataDaily['Daily']), ()) # like an hstack
+countsNormalized = sum(zip(dataNormalized['Normalized']), ())
 
-source = ColumnDataSource(data=dict(x=x, counts=counts))
+source = ColumnDataSource(data=dict(x=xDaily, counts=countsDaily))
 
-zoomed = figure(x_range=FactorRange(*x), height=300, width = 750, title="Detailed COVID Stats for Select Countries", y_axis_label='Deaths')
+zoomed = figure(x_range=FactorRange(*xDaily), height=300, width = 750, title="Detailed COVID Stats for Select Countries", y_axis_label='Deaths')
 
-zoomed.vbar(x='x', top='counts', width=0.9, source=source, line_color="white",
-       fill_color=factor_cmap('x', palette=palette, factors=typeDatas, start=1, end=2))
+zoomed.vbar(x='xDaily', top='countsDaily', width=0.9, source=source, line_color="white",
+       fill_color=factor_cmap('x', palette=palette, factors=typeDatasDaily, start=1, end=2))
+zoomed.vbar(x='xNormalized', top='countsNormalized', width=0.9, source=source, line_color="white",
+       fill_color=factor_cmap('x', palette=palette, factors=typeDatasNormalized, start=1, end=2))
 zoomed.yaxis.axis_label = "Daily Death Rates"
 zoomed.y_range = Range1d(-10,250)
 zoomed.extra_y_ranges['foo'] = Range1d(0,1)
