@@ -45,51 +45,151 @@ for i in range(len(data)):
         totalData.append(data[i][j]["totaldeaths"])
 
 ## define the list of country names 
-countryNames = ['USA', 'India', 'France', 'Germany', 'Brazil', 'S. Korea', 'Japan', 'Italy', 'UK', 'Russia', 'Turkey', 'Spain', 'Vietnam', 'Australia', 'Argentina', 'Netherlands', 'Taiwan', 'Iran', 'Mexico', 
-'Indonesia', 'Poland', 'Colombia', 'Austria', 'Portugal', 'Greece']
-
+countryNames = ['USA', 'India', 'France', 'Germany', 'Brazil', 'S. Korea', 'Japan', 'Italy', 'UK', 'Russia', 'Turkey', 'Taiwan', 'Mexico']
 # REMOVE THIS AND FIX WITH THE AVERAGE DAILY DEATH DATA
-temporaryDailyData = [12, 14, 15, 17, 18, 19, 30, 34, 35, 36, 46, 24, 25, 47, 37, 46, 25, 25, 25, 24, 24,50,46,3,24]
+dailyAverage = []
+normalizedAverage = []
+temporaryDailyData = [12, 14, 15, 17, 18, 19, 30, 34, 35, 36, 46, 24, 25, 47, 37, 46, 25, 25, 25, 24, 24, 50, 46, 3, 24]
 
 # Pull data for a few countries. We chose the US, Taiwan, Italy, Mexico and Germany.
 
 usaData = []
-usaDataNorm = []
+usaNormalized = []
 for i in range(len(data)):
     for j in range(len(data[i])):
         if data[i][j]["name"] == "USA":
-            usaData.append(data[i][j]["dailydeaths"])
-            usaDataNorm.append(data[i][j]["totaldeaths"])
-taiwanData = []
+            usaData.append(float(data[i][j]["dailydeaths"]))
+            usaNormalized.append(float(data[i][j]["totaldeaths"]))
+dailyAverage.append(sum(usaData) / 8)
+normalizedAverage.append(sum(usaNormalized) / 8)
+
+indiaData = []
+indiaNormalized = []
 for i in range(len(data)):
     for j in range(len(data[i])):
-        if data[i][j]["name"] == "Taiwan":
-            taiwanData.append(data[i][j]["dailydeaths"])
-            
-mexicoData = []
+        if data[i][j]["name"] == "India":
+            indiaData.append(float(data[i][j]["dailydeaths"]))
+            indiaNormalized.append(float(data[i][j]["totaldeaths"]))
+dailyAverage.append(sum(indiaData) / 8)
+normalizedAverage.append(sum(indiaNormalized) / 8)
+
+franceData = []
+franceNormalized = []
 for i in range(len(data)):
     for j in range(len(data[i])):
-        if data[i][j]["name"] == "Mexico":
-            mexicoData.append(data[i][j]["dailydeaths"])
-            
-italyData = []
-for i in range(len(data)):
-    for j in range(len(data[i])):
-        if data[i][j]["name"] == "Italy":
-            italyData.append(data[i][j]["dailydeaths"])
-            
+        if data[i][j]["name"] == "France":
+            franceData.append(float(data[i][j]["dailydeaths"]))
+            franceNormalized.append(float(data[i][j]["totaldeaths"]))
+dailyAverage.append(sum(franceData) / 8)
+normalizedAverage.append(sum(franceNormalized) / 8)
+
 germanyData = []
+germanyNormalized = []
 for i in range(len(data)):
     for j in range(len(data[i])):
         if data[i][j]["name"] == "Germany":
-            germanyData.append(data[i][j]["dailydeaths"])
+            germanyData.append(float(data[i][j]["dailydeaths"]))
+            germanyNormalized.append(float(data[i][j]["totaldeaths"]))
+dailyAverage.append(sum(germanyData) / 8)
+normalizedAverage.append(sum(germanyNormalized) / 8)
+
+brazilData = []
+brazilNormalized = []
+for i in range(len(data)):
+    for j in range(len(data[i])):
+        if data[i][j]["name"] == "Brazil":
+            brazilData.append(float(data[i][j]["dailydeaths"]))
+            brazilNormalized.append(float(data[i][j]["totaldeaths"]))
+dailyAverage.append(sum(brazilData) / 8)
+normalizedAverage.append(sum(brazilNormalized) / 8)
+
+koreaData = []
+koreaNormalized = []
+for i in range(len(data)):
+    for j in range(len(data[i])):
+        if data[i][j]["name"] == "S. Korea":
+            koreaData.append(float(data[i][j]["dailydeaths"]))
+            koreaNormalized.append(float(data[i][j]["totaldeaths"]))
+dailyAverage.append(sum(koreaData) / 8)
+normalizedAverage.append(sum(koreaNormalized) / 8)
+
+japanData = []
+japanNormalized = []
+for i in range(len(data)):
+    for j in range(len(data[i])):
+        if data[i][j]["name"] == "Japan":
+            japanData.append(float(data[i][j]["dailydeaths"]))
+            japanNormalized.append(float(data[i][j]["totaldeaths"]))
+dailyAverage.append(sum(japanData) / 8)
+normalizedAverage.append(sum(japanNormalized) / 8)
+
+italyData = []
+italyNormalized = []
+for i in range(len(data)):
+    for j in range(len(data[i])):
+        if data[i][j]["name"] == "Italy":
+            italyData.append(float(data[i][j]["dailydeaths"]))
+            italyNormalized.append(float(data[i][j]["totaldeaths"]))
+dailyAverage.append(sum(italyData) / 8)
+normalizedAverage.append(sum(italyNormalized) / 8)
+
+ukData = []
+ukNormalized = []
+for i in range(len(data)):
+    for j in range(len(data[i])):
+        if data[i][j]["name"] == "UK":
+            ukData.append(float(data[i][j]["dailydeaths"]))
+            ukNormalized.append(float(data[i][j]["totaldeaths"]))
+dailyAverage.append(sum(ukData) / 8)
+normalizedAverage.append(sum(ukNormalized) / 8)
+
+russiaData = []
+russiaNormalized = []
+for i in range(len(data)):
+    for j in range(len(data[i])):
+        if data[i][j]["name"] == "Russia":
+            russiaData.append(float(data[i][j]["dailydeaths"]))
+            russiaNormalized.append(float(data[i][j]["totaldeaths"]))
+dailyAverage.append(sum(russiaData) / 8)
+normalizedAverage.append(sum(russiaNormalized) / 8)
+
+turkeyData = []
+turkeyNormalized = []
+for i in range(len(data)):
+    for j in range(len(data[i])):
+        if data[i][j]["name"] == "Turkey":
+            turkeyData.append(float(data[i][j]["dailydeaths"]))
+            turkeyNormalized.append(float(data[i][j]["totaldeaths"]))
+dailyAverage.append(sum(turkeyData) / 8)
+normalizedAverage.append(sum(turkeyNormalized) / 8)
+
+taiwanData = []
+taiwanNormalized = []
+for i in range(len(data)):
+    for j in range(len(data[i])):
+        if data[i][j]["name"] == "Taiwan":
+            taiwanData.append(float(data[i][j]["dailydeaths"]))
+            taiwanNormalized.append(float(data[i][j]["totaldeaths"]))
+dailyAverage.append(sum(taiwanData) / 8)
+normalizedAverage.append(sum(taiwanNormalized) / 8)
+
+mexicoData = []
+mexicoNormalized = []
+for i in range(len(data)):
+    for j in range(len(data[i])):
+        if data[i][j]["name"] == "Mexico":
+            mexicoData.append(float(data[i][j]["dailydeaths"]))
+            mexicoNormalized.append(float(data[i][j]["totaldeaths"]))
+dailyAverage.append(sum(mexicoData) / 8)
+normalizedAverage.append(sum(mexicoNormalized) / 8)
+
 
 dates = [dt(2022, 12, 2), dt(2022, 12, 3), dt(2022, 12, 5), dt(2022, 12, 6), dt(2022, 12, 7), dt(2022, 12, 8), dt(2022, 12, 9), dt(2022, 12, 10)]
 
 # Plot 1 should contain an overview of all the countries. It will be averaged over all the data. I named it "All Country"
 allCountry = figure(x_range = countryNames, height = 200,width = 1500, title="Average Daily Deaths Per Country Over a One Week Period",
                     toolbar_location = None,tools="",x_axis_label='Country', y_axis_label='Daily Deaths')
-allCountry.vbar(x = countryNames,top = temporaryDailyData,width= 0.5, color = "#205072")
+allCountry.vbar(x = countryNames,top = dailyAverage,width= 0.5, color = "#205072")
 allCountry.xgrid.grid_line_color = None
 allCountry.y_range.start = 0
 allCountry.background_fill_color = "#56C596"
