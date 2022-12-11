@@ -1,0 +1,5 @@
+"git add ." (the period is important, is adds ALL changes) stages any changes you have made so that they are ready to be pushed. You must do this before calling git push.
+"git status" displays any changes that are currently staged
+"git commit -m "<message>" makes the changes permanent on your local machine, where <message> is the commit message (such as "updated README")
+"git push" pushes your local changes to the shared repository
+"git pull" pulls new changes from the shared repository to your local machine

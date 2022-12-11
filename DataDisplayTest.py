@@ -58,6 +58,7 @@ range_slider = RangeSlider(
     end=10,
     step=1,
     value=(p.x_range.start, p.x_range.end),
+   
 )
 range_slider.js_link("value", p.x_range, "start", attr_selector=0)
 range_slider.js_link("value", p.x_range, "end", attr_selector=1)

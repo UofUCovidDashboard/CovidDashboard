@@ -1,5 +1,6 @@
 from bokeh.plotting import figure, show
 import json
+
 '''
 file = open('12-2-22.json')
 
