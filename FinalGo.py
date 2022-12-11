@@ -231,19 +231,19 @@ interactive.outline_line_width = 2
 # REPLACE WITH NORMALIZED DATA FOR 5 COUNTRIES
 historical = figure(title="Historical Normalized Death Rate Over a Week Long Period", x_axis_label='Dates', x_axis_type = "datetime", y_axis_label='Normalized Death Rate',
                     height = 250,width = 1500)
-historical.line(dates, usaData, legend_label="USA", color="blue", line_width=1)
-historical.line(dates, indiaData, legend_label="India", color="blue", line_width=1)
-historical.line(dates, franceData, legend_label="France", color="blue", line_width=1)
-historical.line(dates, germanyData, legend_label="Germany", color="blue", line_width=1)
-historical.line(dates, brazilData, legend_label="Brazil", color="blue", line_width=1)
-historical.line(dates, koreaData, legend_label="Korea", color="blue", line_width=1)
-historical.line(dates, japanData, legend_label="Japan", color="blue", line_width=1)
-historical.line(dates, italyData, legend_label="Italy", color="blue", line_width=1)
-historical.line(dates, ukData, legend_label="UK", color="blue", line_width=1)
-historical.line(dates, russiaData, legend_label="Russia", color="blue", line_width=1)
-historical.line(dates, turkeyData, legend_label="Turkey", color="blue", line_width=1)
-historical.line(dates, taiwanData, legend_label="Taiwan", color="blue", line_width=1)
-historical.line(dates, mexicoData, legend_label="Mexico", color="blue", line_width=1)
+historical.line(dates, usaData, legend_label="USA", color="#1E90FF", line_width=1)
+historical.line(dates, indiaData, legend_label="India", color="#228B22", line_width=1)
+historical.line(dates, franceData, legend_label="France", color="##8A2BE2", line_width=1)
+historical.line(dates, germanyData, legend_label="Germany", color="#7FFFD4", line_width=1)
+historical.line(dates, brazilData, legend_label="Brazil", color="#5F9EA0", line_width=1)
+historical.line(dates, koreaData, legend_label="Korea", color="#B8860B", line_width=1)
+historical.line(dates, japanData, legend_label="Japan", color="#008B8B", line_width=1)
+historical.line(dates, italyData, legend_label="Italy", color="#8FBC8F", line_width=1)
+historical.line(dates, ukData, legend_label="UK", color="indigo", line_width=1)
+historical.line(dates, russiaData, legend_label="Russia", color="lightsalmon", line_width=1)
+historical.line(dates, turkeyData, legend_label="Turkey", color="lightsteelblue", line_width=1)
+historical.line(dates, taiwanData, legend_label="Taiwan", color="mediumaquamarine", line_width=1)
+historical.line(dates, mexicoData, legend_label="Mexico", color="paleturquoise", line_width=1)
 historical.background_fill_color = "#7BE495"
 historical.outline_line_color = "#CFF4D2"
 historical.outline_line_width = 2
