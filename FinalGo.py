@@ -205,13 +205,13 @@ xNormalized = [ (shortList, "Normalized") for shortList in shortLists]
 countsDaily = sum(zip(dataDaily['Daily']), ()) # like an hstack
 countsNormalized = sum(zip(dataNormalized['Normalized']), ())
 
-source = ColumnDataSource(data=dict(x=xDaily, counts=countsDaily))
+source1 = ColumnDataSource(data=dict(x1=xDaily, counts1=countsDaily))
+source2 = ColumnDataSource(data=dict(x2=xNormalized, counts2 = countsNormalized))
+zoomed = figure(x_range=FactorRange(*xDaily,*xNormalized), height=300, width = 750, title="Detailed COVID Stats for Select Countries", y_axis_label='Deaths')
 
-zoomed = figure(x_range=FactorRange(*xDaily), height=300, width = 750, title="Detailed COVID Stats for Select Countries", y_axis_label='Deaths')
-
-zoomed.vbar(x='xDaily', top='countsDaily', width=0.9, source=source, line_color="white",
+zoomed.vbar(x='xDaily', top='countsDaily', width=0.9, source=source1, line_color="white",
        fill_color=factor_cmap('x', palette=palette, factors=typeDatasDaily, start=1, end=2))
-zoomed.vbar(x='xNormalized', top='countsNormalized', width=0.9, source=source, line_color="white",
+zoomed.vbar(x='xNormalized', top='countsNormalized', width=0.9, source=source2, line_color="white",
        fill_color=factor_cmap('x', palette=palette, factors=typeDatasNormalized, start=1, end=2))
 zoomed.yaxis.axis_label = "Daily Death Rates"
 zoomed.y_range = Range1d(-10,250)
