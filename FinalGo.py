@@ -245,9 +245,9 @@ interactive.outline_line_width = 2
 # REPLACE WITH NORMALIZED DATA FOR 5 COUNTRIES
 historical = figure(title="Historical Normalized Death Rate Over a Week Long Period", x_axis_label='Dates', x_axis_type = "datetime", y_axis_label='Normalized Death Rate',
                     height = 250,width = 1500)
-historical.line(dates, usaData, legend_label="USA", color="blue", line_width=1)
-historical.line(dates, indiaData, legend_label="India", color="blue", line_width=1)
-historical.line(dates, franceData, legend_label="France", color="blue", line_width=1)
+historical.line(dates, usaData, legend_label="USA", color="#1E90FF", line_width=1)
+historical.line(dates, indiaData, legend_label="India", color="#228B22", line_width=1)
+historical.line(dates, franceData, legend_label="France", color="#FF00FF", line_width=1)
 historical.line(dates, germanyData, legend_label="Germany", color="blue", line_width=1)
 historical.line(dates, brazilData, legend_label="Brazil", color="blue", line_width=1)
 historical.line(dates, koreaData, legend_label="Korea", color="blue", line_width=1)
