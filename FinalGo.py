@@ -205,13 +205,13 @@ xNormalized = [ (shortList, "Normalized") for shortList in shortLists]
 countsDaily = sum(zip(dataDaily['Daily']), ()) # like an hstack
 countsNormalized = sum(zip(dataNormalized['Normalized']), ())
 
-source = ColumnDataSource(data=dict(x=xDaily, counts=countsDaily))
+source1 = ColumnDataSource(data=dict(x1=xDaily, counts1=countsDaily))
+source2 = ColumnDataSource(data=dict(x2=xNormalized, counts2 = countsNormalized))
+zoomed = figure(x_range=FactorRange(*xDaily,*xNormalized), height=300, width = 750, title="Detailed COVID Stats for Select Countries", y_axis_label='Deaths')
 
-zoomed = figure(x_range=FactorRange(*xDaily), height=300, width = 750, title="Detailed COVID Stats for Select Countries", y_axis_label='Deaths')
-
-zoomed.vbar(x='xDaily', top='countsDaily', width=0.9, source=source, line_color="white",
+zoomed.vbar(x='xDaily', top='countsDaily', width=0.9, source=source1, line_color="white",
        fill_color=factor_cmap('x', palette=palette, factors=typeDatasDaily, start=1, end=2))
-zoomed.vbar(x='xNormalized', top='countsNormalized', width=0.9, source=source, line_color="white",
+zoomed.vbar(x='xNormalized', top='countsNormalized', width=0.9, source=source2, line_color="white",
        fill_color=factor_cmap('x', palette=palette, factors=typeDatasNormalized, start=1, end=2))
 zoomed.yaxis.axis_label = "Daily Death Rates"
 zoomed.y_range = Range1d(-10,250)
@@ -247,17 +247,17 @@ historical = figure(title="Historical Normalized Death Rate Over a Week Long Per
                     height = 250,width = 1500)
 historical.line(dates, usaData, legend_label="USA", color="#1E90FF", line_width=1)
 historical.line(dates, indiaData, legend_label="India", color="#228B22", line_width=1)
-historical.line(dates, franceData, legend_label="France", color="#FF00FF", line_width=1)
-historical.line(dates, germanyData, legend_label="Germany", color="blue", line_width=1)
-historical.line(dates, brazilData, legend_label="Brazil", color="blue", line_width=1)
-historical.line(dates, koreaData, legend_label="Korea", color="blue", line_width=1)
-historical.line(dates, japanData, legend_label="Japan", color="blue", line_width=1)
-historical.line(dates, italyData, legend_label="Italy", color="blue", line_width=1)
-historical.line(dates, ukData, legend_label="UK", color="blue", line_width=1)
-historical.line(dates, russiaData, legend_label="Russia", color="blue", line_width=1)
-historical.line(dates, turkeyData, legend_label="Turkey", color="blue", line_width=1)
-historical.line(dates, taiwanData, legend_label="Taiwan", color="blue", line_width=1)
-historical.line(dates, mexicoData, legend_label="Mexico", color="blue", line_width=1)
+historical.line(dates, franceData, legend_label="France", color="##8A2BE2", line_width=1)
+historical.line(dates, germanyData, legend_label="Germany", color="#7FFFD4", line_width=1)
+historical.line(dates, brazilData, legend_label="Brazil", color="#5F9EA0", line_width=1)
+historical.line(dates, koreaData, legend_label="Korea", color="#B8860B", line_width=1)
+historical.line(dates, japanData, legend_label="Japan", color="#008B8B", line_width=1)
+historical.line(dates, italyData, legend_label="Italy", color="#8FBC8F", line_width=1)
+historical.line(dates, ukData, legend_label="UK", color="indigo", line_width=1)
+historical.line(dates, russiaData, legend_label="Russia", color="lightsalmon", line_width=1)
+historical.line(dates, turkeyData, legend_label="Turkey", color="lightsteelblue", line_width=1)
+historical.line(dates, taiwanData, legend_label="Taiwan", color="mediumaquamarine", line_width=1)
+historical.line(dates, mexicoData, legend_label="Mexico", color="paleturquoise", line_width=1)
 historical.background_fill_color = "#7BE495"
 historical.outline_line_color = "#CFF4D2"
 historical.outline_line_width = 2
