@@ -244,11 +244,23 @@ interactive.outline_line_color = "#CFF4D2"
 interactive.outline_line_width = 2
 
 # Plot 4 should contain historical data over an adjustable period. It needs a slider to adjust the range. I named it "Historical"
-dummyNormData = [0.3, 0.4, 0.5, 0.6, 0.7]
+# dummyNormData = [0.3, 0.4, 0.5, 0.6, 0.7]
 # REPLACE WITH NORMALIZED DATA FOR 5 COUNTRIES
 historical = figure(title="Historical Normalized Death Rate Over a Week Long Period", x_axis_label='Dates', x_axis_type = "datetime", y_axis_label='Normalized Death Rate',
                     height = 250,width = 1500)
-historical.line(dates, dummyNormData, legend_label="USA", color="blue", line_width=2)
+historical.line(dates, usaData, legend_label="USA", color="blue", line_width=1)
+historical.line(dates, indiaData, legend_label="India", color="blue", line_width=1)
+historical.line(dates, franceData, legend_label="France", color="blue", line_width=1)
+historical.line(dates, germanyData, legend_label="Germany", color="blue", line_width=1)
+historical.line(dates, brazilData, legend_label="Brazil", color="blue", line_width=1)
+historical.line(dates, koreaData, legend_label="Korea", color="blue", line_width=1)
+historical.line(dates, japanData, legend_label="Japan", color="blue", line_width=1)
+historical.line(dates, italyData, legend_label="Italy", color="blue", line_width=1)
+historical.line(dates, ukData, legend_label="UK", color="blue", line_width=1)
+historical.line(dates, russiaData, legend_label="Russia", color="blue", line_width=1)
+historical.line(dates, turkeyData, legend_label="Turkey", color="blue", line_width=1)
+historical.line(dates, taiwanData, legend_label="Taiwan", color="blue", line_width=1)
+historical.line(dates, mexicoData, legend_label="Mexico", color="blue", line_width=1)
 historical.background_fill_color = "#7BE495"
 historical.outline_line_color = "#CFF4D2"
 historical.outline_line_width = 2
