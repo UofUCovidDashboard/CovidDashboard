@@ -191,25 +191,20 @@ shortLists = ['USA','Taiwan','Mexico','Italy','Germany']
 typeDatasDaily = ['Daily']
 typeDatasNormalized = ['Normalized']
 
-dataDaily = {'Countries'  : shortLists,
-        'Daily'      : [dailyAverage[0], dailyAverage[11], dailyAverage[12], dailyAverage[7], dailyAverage[3]]}
-dataNormalized = {'Countries'  : shortLists,
-        'Normalized' : [normalizedAverage[0], normalizedAverage[11], normalizedAverage[12], normalizedAverage[7], normalizedAverage[3]]}
+# dataDaily = [dailyAverage[0], dailyAverage[11], dailyAverage[12], dailyAverage[7], dailyAverage[3]]
+dataNormalized = [normalizedAverage[0], normalizedAverage[11], normalizedAverage[12], normalizedAverage[7], normalizedAverage[3]]
 
 # this creates [ ("Apples", "2015"), ("Apples", "2016"), ("Apples", "2017"), ("Pears", "2015), ... ]
-xDaily = [ (shortList, "Daily") for shortList in shortLists]
-xNormalized = [ (shortList, "Normalized") for shortList in shortLists]
-countsDaily = sum(zip(dataDaily['Daily']), ()) # like an hstack
-countsNormalized = sum(zip(dataNormalized['Normalized']), ())
-zoomed = figure(x_range=shortLists, height=300, width = 750, title="Detailed COVID Stats for Select Countries", y_axis_label='Deaths')
+zoomed = figure(x_range=shortLists, height=300, width = 750, title="Detailed Normalized Rates for Select Countries", y_axis_label='Deaths')
 
-zoomed.vbar(x='xDaily', top='countsDaily', width=0.9)
-zoomed.yaxis.axis_label = "Daily Death Rates"
+# zoomed.vbar(x=shortLists, top=dataDaily, width=0.9)
+zoomed.vbar(x=shortLists, top=dataNormalized, width=0.9)
+zoomed.yaxis.axis_label = "Normalized Death Rates by 1M"
 zoomed.y_range.start = 0
 zoomed.x_range.range_padding = 0.1
 zoomed.xaxis.major_label_orientation = 1
 zoomed.xgrid.grid_line_color = None
-
+zoomed.background_fill_color = "#7BE495"
 
 
 # Plot 3 should contain an interactive plot with a detailed view. The legend is interactable. I named it "Interactive"
@@ -229,24 +224,27 @@ interactive.outline_line_width = 2
 # Plot 4 should contain historical data over an adjustable period. It needs a slider to adjust the range. I named it "Historical"
 # dummyNormData = [0.3, 0.4, 0.5, 0.6, 0.7]
 # REPLACE WITH NORMALIZED DATA FOR 5 COUNTRIES
-historical = figure(title="Historical Normalized Death Rate Over a Week Long Period", x_axis_label='Dates', x_axis_type = "datetime", y_axis_label='Normalized Death Rate',
-                    height = 250,width = 1500)
-historical.line(dates, usaData, legend_label="USA", color="#1E90FF", line_width=1)
-historical.line(dates, indiaData, legend_label="India", color="#228B22", line_width=1)
-historical.line(dates, franceData, legend_label="France", color="##8A2BE2", line_width=1)
-historical.line(dates, germanyData, legend_label="Germany", color="#7FFFD4", line_width=1)
-historical.line(dates, brazilData, legend_label="Brazil", color="#5F9EA0", line_width=1)
-historical.line(dates, koreaData, legend_label="Korea", color="#B8860B", line_width=1)
-historical.line(dates, japanData, legend_label="Japan", color="#008B8B", line_width=1)
-historical.line(dates, italyData, legend_label="Italy", color="#8FBC8F", line_width=1)
-historical.line(dates, ukData, legend_label="UK", color="indigo", line_width=1)
-historical.line(dates, russiaData, legend_label="Russia", color="lightsalmon", line_width=1)
-historical.line(dates, turkeyData, legend_label="Turkey", color="lightsteelblue", line_width=1)
-historical.line(dates, taiwanData, legend_label="Taiwan", color="mediumaquamarine", line_width=1)
-historical.line(dates, mexicoData, legend_label="Mexico", color="paleturquoise", line_width=1)
+historical = figure(title="Historical Daily Death Rate Over a Week Long Period", x_axis_label='Dates', x_axis_type = "datetime", y_axis_label='Daily Death Rate',
+                    height = 400,width = 1500)
+historical.line(dates, usaData, legend_label="USA", color="#1E90FF", line_width=2)
+historical.line(dates, indiaData, legend_label="India", color="#228B22", line_width=2)
+historical.line(dates, franceData, legend_label="France", color="#8A2BE2", line_width=2)
+historical.line(dates, germanyData, legend_label="Germany", color="#7FFFD4", line_width=2)
+historical.line(dates, brazilData, legend_label="Brazil", color="#5F9EA0", line_width=2)
+historical.line(dates, koreaData, legend_label="Korea", color="#B8860B", line_width=2)
+historical.line(dates, japanData, legend_label="Japan", color="#008B8B", line_width=2)
+historical.line(dates, italyData, legend_label="Italy", color="#8FBC8F", line_width=2)
+historical.line(dates, ukData, legend_label="UK", color="indigo", line_width=2)
+historical.line(dates, russiaData, legend_label="Russia", color="lightsalmon", line_width=2)
+historical.line(dates, turkeyData, legend_label="Turkey", color="lightsteelblue", line_width=2)
+historical.line(dates, taiwanData, legend_label="Taiwan", color="mediumaquamarine", line_width=2)
+historical.line(dates, mexicoData, legend_label="Mexico", color="paleturquoise", line_width=2)
 historical.background_fill_color = "#7BE495"
 historical.outline_line_color = "#CFF4D2"
 historical.outline_line_width = 2
+historical.legend.orientation = "horizontal"
+historical.legend.location = "top_center"
+historical.y_range = Range1d(0,300)
 # set up RangeSlider
 date_range_slider = DateRangeSlider(
     value=(dates[2], dates[5]),
